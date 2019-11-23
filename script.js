@@ -20,21 +20,34 @@ function Deck() {
 		this.cards.push(new Card(rank, suit, value))
 		}
 	}
-	shuffle(this.cards)
+	Shuffle(this.cards)
 }
 
-function shuffle(cards) {
-	for (let i = cards.length - 1; i > 0; i--) {
+function Shuffle(cards) {
+	this.cards = []
+
+	for (let i = cards.length - 1; i >= 0; i--) {
 		let j = Math.floor(Math.random() * i);
 		let k = cards[i]
 		cards[i] = cards[j]
 		cards[j] = k
+
+		this.cards.push(cards[i])
 	}
+	Deal(this.cards)
+}
+
+function Deal(cards) {
+	let player1 = cards.splice(0, 26)
+	let player2 = cards.splice(0, 26)
+
+	console.log(player1)
+	console.log(player2)
 }
 
 
 let deck1 = new Deck
-console.log(deck1)
+
 
 
 
