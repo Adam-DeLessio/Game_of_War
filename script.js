@@ -88,12 +88,11 @@ function war(player1card, player2card, player1deck, player2deck, player1warStack
 	this.player1warStack = player1warStack
 	this.player2warStack = player2warStack
 
+		player1warStack = player1deck.splice(0, 3)
+		player2warStack = player2deck.splice(0, 3)
 
 		player1warStack.push(player1card)
 		player2warStack.push(player2card)
-
-		player1warStack.push(player1deck.splice(0, 3))
-		player2warStack.push(player2deck.splice(0, 3))
 
 		player1card = player1deck.shift()
 		player2card = player2deck.shift()
@@ -102,14 +101,28 @@ function war(player1card, player2card, player1deck, player2deck, player1warStack
 		console.log("Player 2 played " + player2card.rank + " of " + player2card.suit)
 		if (player1card.value > player2card.value) {
 			player1deck.push(player1card, player2card)
-			player1deck = player1deck.concat(player1warStack, player2warStack)
+
+			for (let i = 0; i < player1warStack.length; i++) {
+				player1deck.push(player1warStack[i])
+			}
+			for (let i = 0; i < player2warStack.length; i++) {
+				player1deck.push(player2warStack[i])
+			}
+
 			console.log("Player 1 wins round")
 			console.log("Player 1 now has " + player1deck.length + " cards")
 			console.log("Player 2 now has " + player2deck.length + " cards")
 			Play(player1deck, player2deck)
 		} else if (player1card.value < player2card.value) {
 			player2deck.push(player1card, player2card)
-			player2deck = player2deck.concat(player1warStack, player2warStack)
+
+			for (let i = 0; i < player1warStack.length; i++) {
+				player2deck.push(player1warStack[i])
+			}
+			for (let i = 0; i < player2warStack.length; i++) {
+				player2deck.push(player2warStack[i])
+			}
+
 			console.log("Player 2 wins round")
 			console.log("Player 1 now has " + player1deck.length + " cards")
 			console.log("Player 2 now has " + player2deck.length + " cards")
