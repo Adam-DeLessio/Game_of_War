@@ -45,6 +45,8 @@ function Deal(cards) {
 }
 
 
+
+
 function Play(player1deck, player2deck) {
 	this.player1deck = player1deck
 	this.player2deck = player2deck
@@ -71,6 +73,42 @@ function Play(player1deck, player2deck) {
 		console.log("Player 2 now has " + player2deck.length + " cards")
 		checkEnd(player1deck, player2deck)
 	} else if (player1card.value === player2card.value) {
+		player1deck.push(player1card)
+		player2deck.push(player2card)
+		console.log("Draw")
+		console.log("Player 1 played " + player1card.rank + " of " + player1card.suit + ", and now has " + player1deck.length + " cards")
+		console.log("Player 2 played " + player2card.rank + " of " + player2card.suit + ", and now has " + player2deck.length + " cards")
+		checkEnd(player1deck, player2deck)
+	}
+}
+
+function checkEnd(player1deck, player2deck) {
+	this.player1deck = player1deck
+	this.player2deck = player2deck
+
+	if (player1deck.length === 0) {
+		console.log("Player 2 Wins the Game!!")
+	} else if (player2deck.length === 0) {
+		console.log("Player 1 Wins the Game!!")
+	} else {
+		Play(player1deck, player2deck)
+	}
+}
+
+
+
+let game = new Deck
+
+
+
+
+
+
+///This was my attempt at making a War clause. It was very close to working but I couldn't finish it.
+
+
+/*
+	} else if (player1card.value === player2card.value) {
 		if (player1deck.length === 0 || player2deck.length === 0) {
 			player1deck.push(player1card)
 			player2deck.push(player2card)
@@ -81,6 +119,7 @@ function Play(player1deck, player2deck) {
 		}
 	}
 }
+
 
 function war(player1card, player2card, player1deck, player2deck, player1warStack, player2warStack) {
 	this.player1card = player1card
@@ -95,7 +134,7 @@ function war(player1card, player2card, player1deck, player2deck, player1warStack
 		player1warStack = player1deck.splice(0, 3)
 		player2warStack = player2deck.splice(0, 3)
 	} else {
-		notEnough(player1deck, player2deck)
+		notEnough(player1card, player2card, player1deck, player2deck, player1warStack,player2warStack)
 	}
 	
 
@@ -143,30 +182,74 @@ function war(player1card, player2card, player1deck, player2deck, player1warStack
 	}
 }
 
-function checkEnd(player1deck, player2deck) {
+
+function notEnough(player1card, player2card, player1deck, player2deck, player1warStack,player2warStack) {
+	this.player1card = player1card
+	this.player2card = player2card
 	this.player1deck = player1deck
 	this.player2deck = player2deck
-
-	if (player1deck.length === 0) {
-		console.log("Player 2 Wins the Game!!")
-	} else if (player2deck.length === 0) {
-		console.log("Player 1 Wins the Game!!")
+	this.player1warStack = player1warStack
+	this.player2warStack = player2warStack
+	
+	if (player1deck.length < 4) {
+		for (let i = 0; i < player1deck.length - 1; i++) {
+			for (let i = 0; i < player1warStack.length; i++) {
+				player1deck.push(player1warStack[i])
+			}
+		}
 	} else {
-		Play(player1deck, player2deck)
+		player1warStack = player1deck.splice(0, 3)
+	}
+	player1card = player1deck.shift()
+
+	if (player2deck.length < 4) {
+		for (let i = 0; i < player2deck.length - 1; i++) {
+			for (let i = 0; i < player2warStack.length; i++) {
+				player2deck.push(player2warStack[i])
+			}
+		}
+	} else {
+		player2warStack = player2deck.splice(0, 3)
+	}
+	player2card = player2deck.shift()
+
+
+	if (player1card.value > player2card.value) {
+		player1deck.push(player1card, player2card)
+
+		for (let i = 0; i < player1warStack.length; i++) {
+			player1deck.push(player1warStack[i])
+		}
+		for (let i = 0; i < player2warStack.length; i++) {
+			player1deck.push(player2warStack[i])
+		}
+
+		console.log("Player 1 wins round")
+		console.log("Player 1 now has " + player1deck.length + " cards")
+		console.log("Player 2 now has " + player2deck.length + " cards")
+		checkEnd(player1deck, player2deck)
+	} else if (player1card.value < player2card.value) {
+		player2deck.push(player1card, player2card)
+
+		for (let i = 0; i < player1warStack.length; i++) {
+			player2deck.push(player1warStack[i])
+		}
+		for (let i = 0; i < player2warStack.length; i++) {
+			player2deck.push(player2warStack[i])
+		}
+
+		console.log("Player 2 wins round")
+		console.log("Player 1 now has " + player1deck.length + " cards")
+		console.log("Player 2 now has " + player2deck.length + " cards")
+		checkEnd(player1deck, player2deck)
+	} else if (player1card.value === player2card.value) {
+
+
+
+
 	}
 }
-
-
-let game = new Deck
-
-
-function notEnough(player1deck, player2deck) {
-	this.player1deck = player1deck
-	this.player2deck = player2deck
-
-	
-
-}
+*/
 
 
 
@@ -174,27 +257,6 @@ function notEnough(player1deck, player2deck) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/// Code for tie breaker without War! clause
-
-	// } else if (player1card.value === player2card.value) {
-	// 	player1deck.push(player1card)
-	// 	player2deck.push(player2card)
-	// 	console.log("Draw")
-	// 	console.log("Player 1 played " + player1card.rank + " of " + player1card.suit + ", and now has " + player1deck.length + " cards")
-	// 	console.log("Player 2 played " + player2card.rank + " of " + player2card.suit + ", and now has " + player2deck.length + " cards")
-	// }
 
 
 
