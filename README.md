@@ -1,4 +1,4 @@
-######Game of War!
+######Game of War!######
 
 > Upon loading the page, the game will begin!
 > A deck of cards is generated, shuffled, and then distributed evenly between two automatically generated players.
