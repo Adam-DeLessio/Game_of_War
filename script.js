@@ -44,9 +44,6 @@ function Deal(cards) {
 	Play(player1deck, player2deck)
 }
 
-
-
-
 function Play(player1deck, player2deck) {
 	this.player1deck = player1deck
 	this.player2deck = player2deck
@@ -76,8 +73,8 @@ function Play(player1deck, player2deck) {
 		player1deck.push(player1card)
 		player2deck.push(player2card)
 		console.log("Draw")
-		console.log("Player 1 played " + player1card.rank + " of " + player1card.suit + ", and now has " + player1deck.length + " cards")
-		console.log("Player 2 played " + player2card.rank + " of " + player2card.suit + ", and now has " + player2deck.length + " cards")
+		console.log("Player 1 has " + player1deck.length + " cards")
+		console.log("Player 2 has " + player2deck.length + " cards")
 		checkEnd(player1deck, player2deck)
 	}
 }
