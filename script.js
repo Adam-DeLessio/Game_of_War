@@ -48,12 +48,11 @@ function Play(player1deck, player2deck) {
 	this.player1deck = player1deck
 	this.player2deck = player2deck
 
-
 	let player1card = player1deck.shift()
 	let player2card = player2deck.shift()
 
-	let player1warStack = []
-	let player2warStack = []
+	// let player1warStack = []
+	// let player2warStack = []
 
 	console.log("Player 1 played " + player1card.rank + " of " + player1card.suit)
 	console.log("Player 2 played " + player2card.rank + " of " + player2card.suit)
@@ -75,9 +74,17 @@ function Play(player1deck, player2deck) {
 		console.log("Draw")
 		console.log("Player 1 has " + player1deck.length + " cards")
 		console.log("Player 2 has " + player2deck.length + " cards")
-		checkEnd(player1deck, player2deck)
+		if (player1deck.length === 1 && player1card.value === 14) {
+			console.log("Player 1 has an ace, therefore the game is a draw")
+			break;
+		} else if (player2deck.length === 1 && player2card.value === 14) {
+			console.log("Player 2 has an ace, therefore the game is a draw")
+			break;
 	}
 }
+Play(player1deck, player2deck)
+}
+
 
 function checkEnd(player1deck, player2deck) {
 	this.player1deck = player1deck
